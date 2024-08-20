@@ -1,6 +1,8 @@
 import { list } from "postcss";
 import styles from "./index.module.css";
 import Image from "next/image";
+import Link from "next/link";
+import { News } from "@/app/_libs/microcms";
 
 type Props = {
   news: News[];
@@ -14,18 +16,33 @@ export default function NewsList({ news }: Props) {
     <ul>
       {news.map((article) => (
         <li className={styles.list} key={article.id}>
-          <div className={styles.link}>
-            <Image
-              className={styles.image}
-              src="/no-image.png"
-              alt="No image"
-              width={1200}
-              height={630}
-            ></Image>
+          <Link href={`/news/${article.id}`} className={styles.link}>
+            {article.thumbnail ? (
+              <Image
+                className={styles.image}
+                src={article.thumbnail.url}
+                alt=""
+                width={article.thumbnail.width}
+                height={article.thumbnail.height}
+              ></Image>
+            ) : (
+              <Image
+                className={styles.image}
+                src="/no-image.png"
+                alt="No image"
+                width={1200}
+                height={630}
+              ></Image>
+            )}
+
             <dl className={styles.list}>
               <dt className={styles.title}>{article.title}</dt>
               <dd className={styles.meta}>
-                <span className={styles.tag}>{article.category.name}</span>
+                {article.category.map((cat) => (
+                  <span key={cat.id} className={styles.tag}>
+                    {cat.name}
+                  </span>
+                ))}
                 <span className={styles.date}>
                   <Image
                     src="/clock.svg"
@@ -38,7 +55,7 @@ export default function NewsList({ news }: Props) {
                 </span>
               </dd>
             </dl>
-          </div>
+          </Link>
         </li>
       ))}
     </ul>

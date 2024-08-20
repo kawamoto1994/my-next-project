@@ -31,7 +31,38 @@
   object-position: right;
   display: flex;
   align-items: center;
+  justify-content: center;
   z-index: -1;
+}
+
+@media (max-width: 640px) {
+  .top {
+    padding: 120px 16px;
+  }
+
+  .title {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .description {
+    text-align: center;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .bgimg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    height: 600px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+  }
 }
 
 .news {
