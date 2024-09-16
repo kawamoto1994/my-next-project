@@ -1,6 +1,8 @@
 import { list } from "postcss";
 import styles from "./index.module.css";
 import Image from "next/image";
+import Category from "@/app/_components/Category";
+import Date from "@/app/_components/Date";
 import Link from "next/link";
 import { News } from "@/app/_libs/microcms";
 
@@ -38,21 +40,8 @@ export default function NewsList({ news }: Props) {
             <dl className={styles.list}>
               <dt className={styles.title}>{article.title}</dt>
               <dd className={styles.meta}>
-                {article.category.map((cat) => (
-                  <span key={cat.id} className={styles.tag}>
-                    {cat.name}
-                  </span>
-                ))}
-                <span className={styles.date}>
-                  <Image
-                    src="/clock.svg"
-                    width={16}
-                    height={16}
-                    alt=""
-                    priority
-                  ></Image>
-                  {article.publishedAt}
-                </span>
+                <Category category={article.category[0]}></Category>
+                <Date date={article.publishedAt ?? article.createdAt}></Date>
               </dd>
             </dl>
           </Link>

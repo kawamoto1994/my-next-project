@@ -21,20 +21,6 @@ export type Member = {
   family?: Family[]; // Family型の配列
 } & MicroCMSListContent;
 
-// export type category = {
-//   name: string;
-// };
-
-// type News = {
-//   id: string;
-//   title: string;
-//   category: {
-//     name: string;
-//   };
-//   publishedAt: string;
-//   createAt: string;
-// };
-
 export type Category = {
   name: string;
 } & MicroCMSListContent;
@@ -74,4 +60,16 @@ export const getNewsList = async (queries?: MicroCMSQueries) => {
     queries,
   });
   return listData;
+};
+
+export const getNewsDetail = async (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
+  const detailDate = await client.getListDetail<News>({
+    endpoint: "news",
+    contentId,
+    queries,
+  });
+  return detailDate;
 };
