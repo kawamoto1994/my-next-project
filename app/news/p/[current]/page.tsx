@@ -43,7 +43,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <NewsList news={news}></NewsList>
-      <Pagenation totalCount={totalCount}></Pagenation>
+      <Pagenation totalCount={totalCount} current={current}></Pagenation>
     </>
   );
 }

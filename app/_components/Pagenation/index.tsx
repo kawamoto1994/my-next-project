@@ -4,9 +4,15 @@ import styles from "./index.module.css";
 
 type Props = {
   totalCount: number;
+  current?: number;
+  basePath?: string;
 };
 
-export default function Pagenation({ totalCount }: Props) {
+export default function Pagenation({
+  totalCount,
+  current = 1,
+  basePath = "/news",
+}: Props) {
   const pages = Array.from(
     {
       length: Math.ceil(totalCount / NEWS_LIST_LIMIT),
@@ -19,9 +25,13 @@ export default function Pagenation({ totalCount }: Props) {
       <ul className={styles.container}>
         {pages.map((p) => (
           <li key={p}>
-            <Link href={`/news/p/${p}`} className={styles.item}>
-              {p}
-            </Link>
+            {current !== p ? (
+              <Link href={`${basePath}/p/${p}`} className={styles.item}>
+                {p}
+              </Link>
+            ) : (
+              <span className={`${styles.item} ${styles.current}`}>{p}</span>
+            )}
           </li>
         ))}
       </ul>
