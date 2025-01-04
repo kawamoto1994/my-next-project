@@ -16,7 +16,7 @@ export default async function Page({ searchParams }: Props) {
   });
   return (
     <>
-      <div>{searchParams.q}</div>
+      {/* <div>{searchParams.q}</div> */}
       <SearchField></SearchField>
       <NewsList news={news}></NewsList>
     </>
